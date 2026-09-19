@@ -215,6 +215,94 @@
       font-weight: 600;
     }
 
+    /* Crazy Interactive Elements for Slide 6 & 7 */
+    .secret-box {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed #a855f7;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 15px 0;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .secret-box:hover {
+      border-color: #f472b6;
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+    }
+
+    .secret-content {
+      filter: blur(8px);
+      transition: filter 0.5s ease;
+      font-size: 0.95rem;
+      color: #fbbf24;
+      line-height: 1.6;
+    }
+
+    .secret-box.revealed .secret-content {
+      filter: blur(0);
+    }
+
+    .secret-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-weight: 700;
+      color: #38bdf8;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.85rem;
+      background: rgba(15, 12, 28, 0.9);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid #38bdf8;
+    }
+
+    .secret-box.revealed .secret-hint {
+      opacity: 0;
+    }
+
+    .cake-container {
+      margin: 15px 0;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cake-emoji {
+      font-size: 5rem;
+      display: inline-block;
+      transition: transform 0.2s;
+    }
+
+    .cake-container:hover .cake-emoji {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .flame {
+      font-size: 2rem;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: flameFlicker 0.6s infinite alternate;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    @keyframes flameFlicker {
+      0% { transform: translateX(-50%) scale(1); filter: drop-shadow(0 0 5px #fbbf24); }
+      100% { transform: translateX(-50%) scale(1.2); filter: drop-shadow(0 0 15px #f97316); }
+    }
+
+    .flame.blown-out {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-20px) scale(0);
+    }
+
     .controls { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 6px; }
     .btn {
       background: rgba(255, 255, 255, 0.06);
@@ -281,7 +369,6 @@
         <div class="photo-frame" style="transform: rotate(-2deg);" onclick="triggerFileInput('file-1')">
           <input type="file" id="file-1" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-1', 'ph-1')">
           <div class="frame-box">
-            <!-- Replace photo1.jpg with your image path or web link -->
             <img id="img-1" src="IMG_20260910_135955_541.jpg" alt="Photo 1" onerror="handleImageError('img-1', 'ph-1')">
             <div class="frame-placeholder" id="ph-1" style="display:none;">
               <span>🖼️</span>
@@ -417,26 +504,22 @@
       </div>
     </div>
 
-    <!-- SLIDE 6 / FRAME 6 -->
+    <!-- SLIDE 6 / CRAZY SECRET REVEAL -->
     <div class="slide">
       <span class="subtitle">Frame 6 of 7</span>
-      <h2 class="serif">One Of A Kind ⭐</h2>
+      <h2 class="serif">Top Secret Classified 🤫</h2>
 
-      <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(2deg);" onclick="triggerFileInput('file-6')">
-          <input type="file" id="file-6" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-6', 'ph-6')">
-          <div class="frame-box">
-            <img id="img-6" src="IMG_20260910_135955_540.jpg" alt="Photo 6" onerror="handleImageError('img-6', 'ph-6')">
-            <div class="frame-placeholder" id="ph-6" style="display:none;">
-              <span>✨</span>
-              Tap to add Photo 6
-            </div>
-          </div>
-          <p class="frame-caption">Star Energy 🚀</p>
+      <p style="margin-bottom: 10px;">Tap the secret box below to decode the birthday secret!</p>
+
+      <div class="secret-box" onclick="revealSecret(this)">
+        <div class="secret-hint">🔍 Tap to Reveal Secret</div>
+        <div class="secret-content">
+          🚨 <strong>WARNING: HIGH LEVEL CRAZINESS</strong> 🚨<br><br>
+          Official Report: <span class="highlight-name">Naina</span> is officially 100% certified awesome, 150% sassy, and 200% illegal amounts of cool! Universe level star energy activated! 🚀✨
         </div>
       </div>
 
-      <p>May every single wish you make today come true in the most magical way!</p>
+      <p id="secret-status-text" style="font-size: 0.8rem; color: #a855f7;">Can you keep a secret? 🔒</p>
 
       <div class="controls">
         <button class="btn" onclick="prevSlide()">Back</button>
@@ -445,26 +528,23 @@
       </div>
     </div>
 
-    <!-- SLIDE 7 / FRAME 7 -->
+    <!-- SLIDE 7 / CRAZY CANDLE BLOWING & CELEBRATION -->
     <div class="slide">
       <span class="subtitle">Frame 7 of 7</span>
-      <h2 class="serif">Cheers to 15! 🎂</h2>
+      <h2 class="serif">Make a Wish! 🎂</h2>
 
-      <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(0deg);" onclick="triggerFileInput('file-7')">
-          <input type="file" id="file-7" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-7', 'ph-7')">
-          <div class="frame-box">
-            <img id="img-7" src="IMG_20260910_135952_724.jpg" alt="Photo 7" onerror="handleImageError('img-7', 'ph-7')">
-            <div class="frame-placeholder" id="ph-7" style="display:none;">
-              <span>🎂</span>
-              Tap to add Photo 7
-            </div>
-          </div>
-          <p class="frame-caption">Happy Birthday Naina! 🥳</p>
-        </div>
+      <p>Tap the candle to blow it out and unlock your birthday wishes!</p>
+
+      <div class="cake-container" onclick="blowCandle()">
+        <div class="flame" id="candle-flame">🔥</div>
+        <div class="cake-emoji">🎂</div>
       </div>
 
-      <button class="btn" onclick="triggerCelebration()" style="background: linear-gradient(135deg, #a855f7, #f472b6); color: #fff; border: none; width: 100%; margin: 6px 0;">Celebrate! 🌌</button>
+      <p id="wish-text" style="font-size: 0.9rem; color: #fbbf24; font-weight: 600; min-height: 40px;">
+        The candle is burning bright... Make a wish! 🕯️
+      </p>
+
+      <button class="btn" onclick="triggerCelebration()" style="background: linear-gradient(135deg, #a855f7, #f472b6); color: #fff; border: none; width: 100%; margin: 6px 0; padding: 12px;">Ultimate Chaos Explosion! 🌌🎉</button>
 
       <div class="controls">
         <button class="btn" onclick="prevSlide()">Back</button>
@@ -500,6 +580,29 @@
           if (placeholder) placeholder.style.display = 'none';
         };
         reader.readAsDataURL(file);
+      }
+    }
+
+    function revealSecret(element) {
+      element.classList.add('revealed');
+      document.getElementById('secret-status-text').innerText = "Secret Unlocked! 🎉 You are officially unstoppable!";
+      triggerCelebration();
+    }
+
+    let candleBlown = false;
+    function blowCandle() {
+      const flame = document.getElementById('candle-flame');
+      const wishText = document.getElementById('wish-text');
+      
+      if (!candleBlown) {
+        flame.classList.add('blown-out');
+        wishText.innerText = "✨ Your wish has been sent into the cosmos! May all your dreams come true, Naina! 🚀";
+        candleBlown = true;
+        triggerCelebration();
+      } else {
+        flame.classList.remove('blown-out');
+        wishText.innerText = "The candle is relit! Make another wish! 🕯️";
+        candleBlown = false;
       }
     }
 
