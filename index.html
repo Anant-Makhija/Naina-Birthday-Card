@@ -16,17 +16,17 @@
     }
 
     body {
-      background-color: #08060f;
+      background-color: #06040a;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       color: #e2e8f0;
     }
 
-    /* Radiant Glow Highlight Effect for Naina's Name */
+    /* Radiant Glow Highlight Effect */
     .highlight-name {
       display: inline-block;
       font-weight: 800;
@@ -40,12 +40,8 @@
     }
 
     @keyframes glowPulse {
-      0% {
-        filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.8));
-      }
-      100% {
-        filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.9));
-      }
+      0% { filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.8)); }
+      100% { filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.9)); }
     }
 
     #confetti-canvas {
@@ -62,41 +58,48 @@
     .bg-decoration {
       position: fixed;
       border-radius: 50%;
-      filter: blur(90px);
+      filter: blur(100px);
       z-index: 0;
-      opacity: 0.55;
+      opacity: 0.5;
       animation: float 12s infinite ease-in-out;
     }
-    .bg-1 { width: 360px; height: 360px; background: #6b21a8; top: -100px; left: -100px; }
-    .bg-2 { width: 400px; height: 400px; background: #be185d; bottom: -120px; right: -120px; animation-delay: -6s; }
-    .bg-3 { width: 280px; height: 280px; background: #1e40af; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -3s; }
+    .bg-1 { width: 400px; height: 400px; background: #6b21a8; top: -100px; left: -100px; }
+    .bg-2 { width: 450px; height: 450px; background: #be185d; bottom: -120px; right: -120px; animation-delay: -6s; }
+    .bg-3 { width: 320px; height: 320px; background: #1e40af; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -3s; }
 
-    /* Music Toggle Button */
-    .audio-btn {
+    /* Audio Player Controls */
+    .audio-controls {
       position: fixed;
       top: 20px;
       right: 20px;
       z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(12px);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 30px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      transition: all 0.3s;
     }
-    .audio-btn:hover { transform: scale(1.1); background: rgba(168, 85, 247, 0.3); }
+
+    .audio-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .audio-btn:hover { transform: scale(1.15); }
 
     /* Main Deck Container */
     .card-deck {
       width: 92%;
-      max-width: 420px;
-      height: 650px;
+      max-width: 440px;
+      height: 680px;
       position: relative;
       z-index: 10;
     }
@@ -108,10 +111,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 12, 28, 0.78);
+      background: rgba(15, 12, 28, 0.82);
       backdrop-filter: blur(30px);
       -webkit-backdrop-filter: blur(30px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 32px;
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8),
                   inset 0 1px 0 rgba(255, 255, 255, 0.15);
@@ -125,7 +128,10 @@
       visibility: hidden;
       transform: translateY(20px) scale(0.95);
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
     }
+
+    .slide::-webkit-scrollbar { display: none; }
 
     .slide.active {
       opacity: 1;
@@ -133,111 +139,62 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Text Fonts */
-    .serif { font-family: 'Cinzel', serif; letter-spacing: 2px; }
-    h1 {
-      font-size: 1.8rem;
-      background: linear-gradient(135deg, #ffffff 0%, #d8b4fe 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.2;
-      text-shadow: 0 0 30px rgba(216, 180, 254, 0.3);
-    }
-    h2 { font-size: 1.4rem; color: #f472b6; text-shadow: 0 0 20px rgba(244, 114, 182, 0.4); }
-    p { font-size: 0.88rem; color: #a1a1aa; line-height: 1.5; font-weight: 300; }
-    .subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #a855f7; font-weight: 600; }
+    /* Text Styles */
+    .serif { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
+    h2 { font-size: 1.35rem; color: #f472b6; text-shadow: 0 0 15px rgba(244, 114, 182, 0.4); }
+    p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; font-weight: 300; }
+    .subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #a855f7; font-weight: 700; }
 
-    /* Cover Slide */
-    .main-wish-title {
-      font-size: 1.6rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #ffffff 10%, #f472b6 50%, #a855f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    .start-btn {
-      background: linear-gradient(135deg, #a855f7, #f472b6);
-      color: #ffffff;
-      border: none;
-      padding: 12px 26px;
-      border-radius: 30px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(168, 85, 247, 0.5);
-      transition: all 0.3s ease;
-    }
-    .start-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(244, 114, 182, 0.7);
-    }
-
-    /* Universal Frame Styles */
-    .single-frame {
-      width: 170px;
-      background: #181528;
-      padding: 8px 8px 14px 8px;
+    /* Heartfelt Paragraph Box */
+    .note-box {
+      background: rgba(255, 255, 255, 0.04);
+      border-left: 3px solid #f472b6;
       border-radius: 12px;
-      border: 1.5px solid rgba(244, 114, 182, 0.3);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.6), 0 0 15px rgba(168, 85, 247, 0.25);
-      transform: rotate(-2deg);
-      transition: all 0.3s ease;
-      margin: 6px auto;
+      padding: 12px 14px;
+      margin: 8px 0;
+      text-align: left;
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
     }
 
-    .single-frame:hover {
-      transform: scale(1.05) rotate(0deg);
-      border-color: #f472b6;
-      box-shadow: 0 0 25px rgba(244, 114, 182, 0.5);
-    }
-
-    .photo-grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+    /* Photo Frame Styles */
+    .single-frame-container {
       width: 100%;
+      display: flex;
+      justify-content: center;
       margin: 6px 0;
     }
 
     .photo-frame {
       background: #181528;
-      padding: 6px 6px 10px 6px;
-      border-radius: 10px;
-      border: 1.5px solid rgba(244, 114, 182, 0.3);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.6);
+      padding: 10px 10px 16px 10px;
+      border-radius: 16px;
+      border: 2px solid rgba(244, 114, 182, 0.35);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7), 0 0 20px rgba(168, 85, 247, 0.25);
+      width: 240px;
+      position: relative;
       transition: all 0.3s ease;
     }
 
-    .photo-frame:nth-child(1) { transform: rotate(-2deg); }
-    .photo-frame:nth-child(2) { transform: rotate(2deg); }
-    .photo-frame:nth-child(3) { transform: rotate(2deg); }
-    .photo-frame:nth-child(4) { transform: rotate(-2deg); }
-
     .photo-frame:hover {
-      transform: scale(1.06) rotate(0deg);
+      transform: scale(1.03) rotate(0deg) !important;
       border-color: #f472b6;
-      box-shadow: 0 0 20px rgba(244, 114, 182, 0.6);
-      z-index: 5;
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.5);
     }
 
     .frame-box {
       width: 100%;
-      height: 95px;
-      border-radius: 6px;
+      height: 200px;
+      border-radius: 10px;
       background: #0f0c1c;
-      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border: 1px dashed rgba(255, 255, 255, 0.25);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       position: relative;
-    }
-
-    .frame-box.large {
-      height: 135px;
     }
 
     .frame-box img {
@@ -251,111 +208,27 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       color: #a855f7;
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       font-weight: 600;
     }
 
-    .frame-placeholder span { font-size: 1.2rem; }
+    .frame-placeholder span { font-size: 1.8rem; }
 
     .frame-caption {
-      font-size: 0.68rem;
-      margin-top: 5px;
-      color: #e2e8f0;
+      font-size: 0.8rem;
+      margin-top: 8px;
+      color: #f3e8ff;
       font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    /* Reasons Box */
-    .reasons-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 12px;
-      width: 100%;
-      min-height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .reason-text { font-size: 0.88rem; color: #f472b6; font-weight: 600; }
-
-    /* Scratch Box */
-    .scratch-container {
-      position: relative;
-      width: 100%;
-      height: 90px;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-    .scratch-secret {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: #181528;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      color: #38bdf8;
-      font-weight: 600;
-      font-size: 0.82rem;
-    }
-    canvas#scratch-canvas {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      cursor: pointer;
-    }
-
-    /* Cake Animation */
-    .cake-wrapper { position: relative; margin: 10px 0; cursor: pointer; }
-    .cake {
-      width: 110px;
-      height: 60px;
-      background: #201930;
-      border-radius: 12px 12px 6px 6px;
-      position: relative;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 -12px 0 #130f1e;
-    }
-    .cake::before {
-      content: '';
-      position: absolute;
-      top: -18px; left: 10px;
-      width: 90px; height: 22px;
-      background: #35274d;
-      border-radius: 8px 8px 0 0;
-    }
-    .candle {
-      position: absolute;
-      top: -42px; left: 50px;
-      width: 10px; height: 26px;
-      background: repeating-linear-gradient(45deg, #a855f7, #a855f7 5px, #181528 5px, #181528 10px);
-      border-radius: 4px;
-    }
-    .flame {
-      position: absolute;
-      top: -18px; left: -2px;
-      width: 14px; height: 22px;
-      background: #fbbf24;
-      border-radius: 50% 50% 20% 20%;
-      box-shadow: 0 0 15px #fbbf24, 0 0 30px #f59e0b;
-      animation: flicker 0.8s infinite alternate;
-      transition: opacity 0.4s;
-    }
-    .flame.out { opacity: 0; }
-
-    /* Controls */
-    .controls { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    /* Buttons & Controls */
+    .controls { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 6px; }
     .btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 9px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 8px 16px;
       border-radius: 30px;
       color: #e2e8f0;
       font-weight: 600;
@@ -368,7 +241,7 @@
       background: #a855f7;
       color: #fff;
       border-color: #a855f7;
-      box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
       transform: translateY(-2deg);
     }
     .btn:disabled { opacity: 0.2; cursor: not-allowed; transform: none; box-shadow: none; }
@@ -377,10 +250,21 @@
     .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); transition: all 0.3s; }
     .dot.active { background: #a855f7; width: 16px; border-radius: 10px; box-shadow: 0 0 10px #a855f7; }
 
-    /* Animations */
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-30px) rotate(10deg); } }
-    @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(168, 85, 247, 0.4); } 50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(244, 114, 182, 0.6); } }
-    @keyframes flicker { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.15); opacity: 1; } }
+    /* Particles */
+    .sparkle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: particleFade 1s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes particleFade {
+      0% { transform: scale(1) translateY(0); opacity: 1; }
+      100% { transform: scale(0) translateY(-30px); opacity: 0; }
+    }
+
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(8deg); } }
   </style>
 </head>
 <body>
@@ -390,106 +274,92 @@
   <div class="bg-decoration bg-2"></div>
   <div class="bg-decoration bg-3"></div>
 
-  <!-- Ambient Audio Button -->
-  <div class="audio-btn" onclick="toggleAudio()" title="Play Music">
-    <span id="audio-icon">🎵</span>
+  <!-- Music Controls -->
+  <div class="audio-controls">
+    <button class="audio-btn" id="music-btn" onclick="toggleAudio()" title="Toggle Music">🎵</button>
+    <span id="music-text" style="font-size: 0.75rem; color: #a855f7; font-weight: 600;">Tap anywhere to play</span>
   </div>
 
   <canvas id="confetti-canvas"></canvas>
 
   <div class="card-deck">
 
-    <!-- SLIDE 1: COVER WITH FRAME -->
+    <!-- SLIDE 1 / FRAME 1 -->
     <div class="slide active">
-      <span class="subtitle">✨ Special Message ✨</span>
-      <h1 class="serif main-wish-title">Happy 15th Birthday <span class="highlight-name">Naina</span>!</h1>
+      <span class="subtitle">Frame 1 of 7</span>
+      <h2 class="serif">Happy 15th Birthday <span class="highlight-name">Naina</span>! 🎉</h2>
       
-      <!-- FRAME SLIDE 1 -->
-      <div class="single-frame">
-        <div class="frame-box large">
-          <img src="" alt="Cover Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder">
-            <span>👑</span>
-            Birthday Star
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(-2deg);">
+          <div class="frame-box">
+            <img id="img-1" src="" alt="Photo 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>🖼️</span>
+              Photo Frame 1
+            </div>
           </div>
+          <p class="frame-caption">The Birthday Queen 👑</p>
         </div>
-        <p class="frame-caption">The Birthday Queen 💖</p>
       </div>
 
-      <button class="start-btn" onclick="nextSlide()">Open Card 💌</button>
+      <div class="note-box">
+        ✨ <strong>Happy 15th Birthday, <span class="highlight-name">Naina</span>!</strong> Seeing you step into 15 with so much elegance, warmth, and joy is truly amazing. May this year bring endless smiles and unforgettable adventures!
+      </div>
+
       <div class="controls">
         <button class="btn" onclick="prevSlide()" disabled>Back</button>
-        <div class="dots" id="dots-container"></div>
-        <button class="btn" onclick="nextSlide()">Next ✨</button>
-      </div>
-    </div>
-
-    <!-- SLIDE 2: MESSAGE WITH FRAME -->
-    <div class="slide">
-      <span class="subtitle">Birthday Wish</span>
-      <h2 class="serif">Happy 15th, <span class="highlight-name">Naina</span>! 🖤</h2>
-      
-      <!-- FRAME SLIDE 2 -->
-      <div class="single-frame">
-        <div class="frame-box">
-          <img src="" alt="Wish Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder">
-            <span>✨</span>
-            Wish Photo
-          </div>
-        </div>
-        <p class="frame-caption">Keep Shining 🌌</p>
-      </div>
-
-      <p>Happy 15th Birthday! May your year be filled with lots of fun, laughter, and great moments.</p>
-      <div class="controls">
-        <button class="btn" onclick="prevSlide()">Back</button>
         <div class="dots"></div>
         <button class="btn" onclick="nextSlide()">Next ✨</button>
       </div>
     </div>
 
-    <!-- SLIDE 3: 4 PHOTO FRAMES GALLERY -->
+    <!-- SLIDE 2 / FRAME 2 -->
     <div class="slide">
-      <span class="subtitle">Memories Gallery</span>
-      <h2 class="serif"><span class="highlight-name">Naina</span>'s Moments</h2>
-      
-      <div class="photo-grid-container">
-        <!-- FRAME 1 -->
-        <div class="photo-frame">
-          <div class="frame-box">
-            <img src="" alt="Photo 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder"><span>🖼️</span>Photo 1</div>
-          </div>
-          <p class="frame-caption">Night Vibes 🌙</p>
-        </div>
+      <span class="subtitle">Frame 2 of 7</span>
+      <h2 class="serif">Shining Bright ✨</h2>
 
-        <!-- FRAME 2 -->
-        <div class="photo-frame">
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(2deg);">
           <div class="frame-box">
-            <img src="" alt="Photo 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder"><span>📸</span>Photo 2</div>
-          </div>
-          <p class="frame-caption">Fun Times ✨</p>
-        </div>
-
-        <!-- FRAME 3 -->
-        <div class="photo-frame">
-          <div class="frame-box">
-            <img src="" alt="Photo 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder"><span>🌟</span>Photo 3</div>
+            <img id="img-2" src="" alt="Photo 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>📸</span>
+              Photo Frame 2
+            </div>
           </div>
           <p class="frame-caption">Best Smile 😊</p>
         </div>
+      </div>
 
-        <!-- FRAME 4 -->
-        <div class="photo-frame">
+      <p>Your smile lights up every room and brings instant warmth to everyone around you!</p>
+
+      <div class="controls">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <div class="dots"></div>
+        <button class="btn" onclick="nextSlide()">Next ✨</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 / FRAME 3 -->
+    <div class="slide">
+      <span class="subtitle">Frame 3 of 7</span>
+      <h2 class="serif">Favorite Person Note 💖</h2>
+
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(-3deg);">
           <div class="frame-box">
-            <img src="" alt="Photo 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder"><span>💖</span>Photo 4</div>
+            <img id="img-3" src="" alt="Photo 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>🌟</span>
+              Photo Frame 3
+            </div>
           </div>
-          <p class="frame-caption">Queen Energy 👑</p>
+          <p class="frame-caption">Pure Joy 🌙</p>
         </div>
+      </div>
+
+      <div class="note-box">
+        🌸 <strong>Why You Are My Favorite Person:</strong> Out of everyone in the world, you have become my absolute favorite person. Your kindness, humor, and gentle heart make every ordinary day feel extraordinary. Thank you for simply being you!
       </div>
 
       <div class="controls">
@@ -499,78 +369,26 @@
       </div>
     </div>
 
-    <!-- SLIDE 4: 15 REASONS WITH FRAME -->
+    <!-- SLIDE 4 / FRAME 4 -->
     <div class="slide">
-      <span class="subtitle">15 Reasons</span>
-      <h2 class="serif">Why <span class="highlight-name">Naina</span> Is Awesome</h2>
-      
-      <!-- FRAME SLIDE 4 -->
-      <div class="single-frame" style="width: 140px;">
-        <div class="frame-box" style="height: 80px;">
-          <img src="" alt="Reason Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder"><span>🔮</span>Reason Frame</div>
-        </div>
-        <p class="frame-caption">Always Awesome 💫</p>
-      </div>
+      <span class="subtitle">Frame 4 of 7</span>
+      <h2 class="serif">Iconic Vibes 🔮</h2>
 
-      <div class="reasons-box">
-        <p class="reason-text" id="reason-display">Click below to see 15 reasons! ✦</p>
-      </div>
-      <button class="btn" onclick="nextReason()" style="background: rgba(168, 85, 247, 0.2);">Click Here 🔮</button>
-      <div class="controls">
-        <button class="btn" onclick="prevSlide()">Back</button>
-        <div class="dots"></div>
-        <button class="btn" onclick="nextSlide()">Next ✨</button>
-      </div>
-    </div>
-
-    <!-- SLIDE 5: SCRATCH CARD WITH FRAME -->
-    <div class="slide">
-      <span class="subtitle">Secret Note</span>
-      <h2 class="serif">Scratch Here</h2>
-
-      <!-- FRAME SLIDE 5 -->
-      <div class="single-frame" style="width: 140px;">
-        <div class="frame-box" style="height: 80px;">
-          <img src="" alt="Secret Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder"><span>💌</span>Secret Frame</div>
-        </div>
-        <p class="frame-caption">Top Secret 🤫</p>
-      </div>
-
-      <div class="scratch-container">
-        <div class="scratch-secret">"<span class="highlight-name">Naina</span>, you can do anything you put your mind to. Happy 15th! 👑"</div>
-        <canvas id="scratch-canvas"></canvas>
-      </div>
-      <div class="controls">
-        <button class="btn" onclick="prevSlide()">Back</button>
-        <div class="dots"></div>
-        <button class="btn" onclick="nextSlide()">Next ✨</button>
-      </div>
-    </div>
-
-    <!-- SLIDE 6: CAKE WITH FRAME -->
-    <div class="slide">
-      <span class="subtitle">Make A Wish</span>
-      <h2 class="serif">Blow The Candle</h2>
-
-      <!-- FRAME SLIDE 6 -->
-      <div class="single-frame" style="width: 140px;">
-        <div class="frame-box" style="height: 80px;">
-          <img src="" alt="Wish Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder"><span>🎂</span>Wish Frame</div>
-        </div>
-        <p class="frame-caption">Celebration Time 🎉</p>
-      </div>
-
-      <div class="cake-wrapper" onclick="toggleCandle()">
-        <div class="cake">
-          <div class="candle">
-            <div class="flame" id="flame"></div>
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(3deg);">
+          <div class="frame-box">
+            <img id="img-4" src="" alt="Photo 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>💖</span>
+              Photo Frame 4
+            </div>
           </div>
+          <p class="frame-caption">Always Stylish 💅</p>
         </div>
       </div>
-      <p id="cake-status" style="font-weight: 600; color: #a855f7; font-size: 0.8rem;">Click candle flame to blow it out 🕯️</p>
+
+      <p>15 years of being purely stylish, smart, and unstoppable!</p>
+
       <div class="controls">
         <button class="btn" onclick="prevSlide()">Back</button>
         <div class="dots"></div>
@@ -578,22 +396,80 @@
       </div>
     </div>
 
-    <!-- SLIDE 7: FINALE WITH FRAME -->
+    <!-- SLIDE 5 / FRAME 5 -->
     <div class="slide">
-      <span class="subtitle">Happy Birthday!</span>
-      <h1 class="serif" style="font-size: 1.5rem;">Have A Great Year, <span class="highlight-name">Naina</span>! 🎉</h1>
+      <span class="subtitle">Frame 5 of 7</span>
+      <h2 class="serif">Golden Memories 🌌</h2>
 
-      <!-- FRAME SLIDE 7 -->
-      <div class="single-frame">
-        <div class="frame-box">
-          <img src="" alt="Finale Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="frame-placeholder"><span>🌌</span>Finale Frame</div>
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(-2deg);">
+          <div class="frame-box">
+            <img id="img-5" src="" alt="Photo 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>🎬</span>
+              Photo Frame 5
+            </div>
+          </div>
+          <p class="frame-caption">Precious Moments 🎈</p>
         </div>
-        <p class="frame-caption">Best Year Ahead 🚀</p>
       </div>
 
-      <p style="font-size: 0.82rem;">Wishing you happiness, success, and joy all year long.</p>
-      <button class="btn" onclick="triggerCelebration()" style="background: linear-gradient(135deg, #a855f7, #f472b6); color: #fff; border: none; width: 100%;">Celebrate! 🌌</button>
+      <p>Here’s to creating a thousand more beautiful memories together this year.</p>
+
+      <div class="controls">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <div class="dots"></div>
+        <button class="btn" onclick="nextSlide()">Next ✨</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 / FRAME 6 -->
+    <div class="slide">
+      <span class="subtitle">Frame 6 of 7</span>
+      <h2 class="serif">One Of A Kind ⭐</h2>
+
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(2deg);">
+          <div class="frame-box">
+            <img id="img-6" src="" alt="Photo 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>✨</span>
+              Photo Frame 6
+            </div>
+          </div>
+          <p class="frame-caption">Star Energy 🚀</p>
+        </div>
+      </div>
+
+      <p>May every single wish you make today come true in the most magical way!</p>
+
+      <div class="controls">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <div class="dots"></div>
+        <button class="btn" onclick="nextSlide()">Next ✨</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 / FRAME 7 -->
+    <div class="slide">
+      <span class="subtitle">Frame 7 of 7</span>
+      <h2 class="serif">Cheers to 15! 🎂</h2>
+
+      <div class="single-frame-container">
+        <div class="photo-frame" style="transform: rotate(0deg);">
+          <div class="frame-box">
+            <img id="img-7" src="" alt="Photo 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="frame-placeholder">
+              <span>🎂</span>
+              Photo Frame 7
+            </div>
+          </div>
+          <p class="frame-caption">Happy Birthday Naina! 🥳</p>
+        </div>
+      </div>
+
+      <button class="btn" onclick="triggerCelebration()" style="background: linear-gradient(135deg, #a855f7, #f472b6); color: #fff; border: none; width: 100%; margin: 6px 0;">Celebrate! 🌌</button>
+
       <div class="controls">
         <button class="btn" onclick="prevSlide()">Back</button>
         <div class="dots"></div>
@@ -606,6 +482,99 @@
   <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
+
+    // Advanced Web Audio API Piano/Chime Synthesizer
+    let audioCtx = null;
+    let isPlaying = false;
+    let timerId = null;
+
+    // Happy Birthday melody notes (Note, Duration in sec)
+    const song = [
+      { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 293.66, dur: 0.6 },
+      { note: 261.63, dur: 0.6 },  { note: 349.23, dur: 0.6 },  { note: 329.63, dur: 1.0 },
+      
+      { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 293.66, dur: 0.6 },
+      { note: 261.63, dur: 0.6 },  { note: 392.00, dur: 0.6 },  { note: 349.23, dur: 1.0 },
+      
+      { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 523.25, dur: 0.6 },
+      { note: 440.00, dur: 0.6 },  { note: 349.23, dur: 0.6 },  { note: 329.63, dur: 0.6 }, { note: 293.66, dur: 0.8 },
+      
+      { note: 466.16, dur: 0.35 }, { note: 466.16, dur: 0.25 }, { note: 440.00, dur: 0.6 },
+      { note: 349.23, dur: 0.6 },  { note: 392.00, dur: 0.6 },  { note: 349.23, dur: 1.2 }
+    ];
+
+    let noteIndex = 0;
+
+    function playPianoNote(freq, duration) {
+      if (!audioCtx) return;
+
+      const now = audioCtx.currentTime;
+
+      // Main Oscillator (Sine + Triangle blend for piano sound)
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      osc1.type = 'sine';
+      osc2.type = 'triangle';
+
+      osc1.frequency.setValueAtTime(freq, now);
+      osc2.frequency.setValueAtTime(freq * 2, now); // Harmonic overtone
+
+      // Gain Envelope (Piano Key strike decay)
+      gainNode.gain.setValueAtTime(0.001, now);
+      gainNode.gain.linearRampToValueAtTime(0.25, now + 0.03); // Quick attack
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.3); // Soft decay
+
+      osc1.connect(gainNode);
+      osc2.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      osc1.start(now);
+      osc2.start(now);
+
+      osc1.stop(now + duration + 0.4);
+      osc2.stop(now + duration + 0.4);
+    }
+
+    function stepMelody() {
+      if (!isPlaying) return;
+      const current = song[noteIndex];
+      playPianoNote(current.note, current.dur);
+
+      noteIndex = (noteIndex + 1) % song.length;
+      timerId = setTimeout(stepMelody, current.dur * 750);
+    }
+
+    function startMusic() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      if (!isPlaying) {
+        isPlaying = true;
+        document.getElementById('music-btn').innerText = "🎶";
+        document.getElementById('music-text').innerText = "Playing Birthday Music";
+        stepMelody();
+      }
+    }
+
+    function toggleAudio() {
+      if (isPlaying) {
+        isPlaying = false;
+        clearTimeout(timerId);
+        document.getElementById('music-btn').innerText = "🎵";
+        document.getElementById('music-text').innerText = "Music Paused";
+      } else {
+        startMusic();
+      }
+    }
+
+    // Auto-start music on first interaction (click/touch/slide navigation)
+    window.addEventListener('click', startMusic, { once: true });
+    window.addEventListener('touchstart', startMusic, { once: true });
 
     // Dots Setup
     function setupDots() {
@@ -626,7 +595,6 @@
       slides.forEach((slide, idx) => {
         if (idx === currentSlide) {
           slide.classList.add('active');
-          if (idx === 4) initScratchCard();
         } else {
           slide.classList.remove('active');
         }
@@ -634,6 +602,7 @@
     }
 
     function nextSlide() {
+      startMusic();
       if (currentSlide < slides.length - 1) {
         currentSlide++;
         updateSlides();
@@ -642,6 +611,7 @@
     }
 
     function prevSlide() {
+      startMusic();
       if (currentSlide > 0) {
         currentSlide--;
         updateSlides();
@@ -653,143 +623,24 @@
       updateSlides();
     }
 
-    // 15 Easy Reasons for Naina
-    const reasons = [
-      "1. <span class='highlight-name'>Naina</span> has great taste! ✨",
-      "2. Always fun to talk to 🌙",
-      "3. Very kind and friendly 🖤",
-      "4. Plays the best songs 🎧",
-      "5. Great sense of style 💅",
-      "6. Makes people laugh 👑",
-      "7. Very smart and thoughtful 🖤",
-      "8. Brings good energy everywhere ✨",
-      "9. Gives helpful advice 🔮",
-      "10. Has a kind heart 💖",
-      "11. Always works hard 🚀",
-      "12. Makes fun memories 📸",
-      "13. Coolest 15-year-old 🌌",
-      "14. One of a kind friend 🎬",
-      "15. Simply being <span class='highlight-name'>NAINA</span>! 🎉"
-    ];
-    let reasonIndex = 0;
-    function nextReason() {
-      document.getElementById('reason-display').innerHTML = reasons[reasonIndex];
-      reasonIndex = (reasonIndex + 1) % reasons.length;
-    }
-
-    // Scratch Card
-    let scratchInited = false;
-    function initScratchCard() {
-      if (scratchInited) return;
-      const canvas = document.getElementById('scratch-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-
-      ctx.fillStyle = '#382b52';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = '13px Plus Jakarta Sans';
-      ctx.fillStyle = '#a855f7';
-      ctx.textAlign = 'center';
-      ctx.fillText('Scratch here with your cursor ✦', canvas.width/2, canvas.height/2);
-
-      let isDrawing = false;
-      function scratch(e) {
-        if (!isDrawing) return;
-        const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX || e.touches[0].clientX) - rect.left;
-        const y = (e.clientY || e.touches[0].clientY) - rect.top;
-
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.beginPath();
-        ctx.arc(x, y, 18, 0, Math.PI * 2);
-        ctx.fill();
+    // Interactive Sparkles Trail
+    window.addEventListener('mousemove', (e) => {
+      if (Math.random() < 0.2) {
+        const particle = document.createElement('div');
+        particle.className = 'sparkle';
+        const colors = ['#f472b6', '#38bdf8', '#fbbf24', '#a855f7'];
+        const size = Math.random() * 8 + 4;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = `${e.clientX}px`;
+        particle.style.top = `${e.clientY}px`;
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 1000);
       }
+    });
 
-      canvas.addEventListener('mousedown', () => isDrawing = true);
-      canvas.addEventListener('mouseup', () => isDrawing = false);
-      canvas.addEventListener('mousemove', scratch);
-      canvas.addEventListener('touchstart', () => isDrawing = true);
-      canvas.addEventListener('touchend', () => isDrawing = false);
-      canvas.addEventListener('touchmove', scratch);
-      scratchInited = true;
-    }
-
-    // Candle Blow Interaction
-    let flameBlown = false;
-    function toggleCandle() {
-      const flame = document.getElementById('flame');
-      const status = document.getElementById('cake-status');
-      flame.classList.toggle('out');
-      flameBlown = !flameBlown;
-
-      if (flameBlown) {
-        status.innerHTML = "Wish made! ✨ Happy 15th, <span class='highlight-name'>Naina</span>!";
-        triggerCelebration();
-      } else {
-        status.innerText = "Click candle flame to blow it out 🕯️";
-      }
-    }
-
-    // Microphone blow detection
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const mic = audioCtx.createMediaStreamSource(stream);
-        const analyser = audioCtx.createAnalyser();
-        mic.connect(analyser);
-        const data = new Uint8Array(analyser.frequencyBinCount);
-
-        function checkBlow() {
-          analyser.getByteFrequencyData(data);
-          let sum = data.reduce((a, b) => a + b, 0);
-          if (sum / data.length > 55 && !flameBlown && currentSlide === 5) {
-            toggleCandle();
-          }
-          requestAnimationFrame(checkBlow);
-        }
-        checkBlow();
-      }).catch(() => {});
-    }
-
-    // Music chimes
-    let audioCtx;
-    let isPlaying = false;
-    function toggleAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const icon = document.getElementById('audio-icon');
-
-      if (!isPlaying) {
-        isPlaying = true;
-        icon.innerText = "🎶";
-        playChimes();
-      } else {
-        isPlaying = false;
-        icon.innerText = "🎵";
-      }
-    }
-
-    function playChimes() {
-      if (!isPlaying) return;
-      const notes = [261.63, 329.63, 392.00, 523.25, 659.25];
-      const freq = notes[Math.floor(Math.random() * notes.length)];
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 3);
-
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 3);
-
-      setTimeout(playChimes, 1200);
-    }
-
-    // Confetti Animation
+    // Confetti Engine
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -803,14 +654,14 @@
 
     function triggerCelebration() {
       const neonColors = ['#38bdf8', '#fbbf24', '#a855f7', '#f472b6', '#ffffff'];
-      for (let i = 0; i < 90; i++) {
+      for (let i = 0; i < 110; i++) {
         particles.push({
           x: canvas.width / 2,
           y: canvas.height / 2,
-          size: Math.random() * 6 + 3,
+          size: Math.random() * 7 + 3,
           color: neonColors[Math.floor(Math.random() * neonColors.length)],
-          speedY: Math.random() * 12 - 6,
-          speedX: Math.random() * 12 - 6,
+          speedY: Math.random() * 14 - 7,
+          speedX: Math.random() * 14 - 7,
           gravity: 0.12,
           alpha: 1
         });
@@ -823,7 +674,7 @@
         p.y += p.speedY;
         p.x += p.speedX;
         p.speedY += p.gravity;
-        p.alpha -= 0.005;
+        p.alpha -= 0.006;
 
         ctx.save();
         ctx.globalAlpha = Math.max(p.alpha, 0);
