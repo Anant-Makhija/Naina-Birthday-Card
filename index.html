@@ -26,7 +26,6 @@
       color: #e2e8f0;
     }
 
-    /* Radiant Glow Highlight Effect */
     .highlight-name {
       display: inline-block;
       font-weight: 800;
@@ -54,7 +53,6 @@
       z-index: 100;
     }
 
-    /* Background Glows */
     .bg-decoration {
       position: fixed;
       border-radius: 50%;
@@ -67,7 +65,6 @@
     .bg-2 { width: 450px; height: 450px; background: #be185d; bottom: -120px; right: -120px; animation-delay: -6s; }
     .bg-3 { width: 320px; height: 320px; background: #1e40af; top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -3s; }
 
-    /* Audio Player Controls */
     .audio-controls {
       position: fixed;
       top: 20px;
@@ -95,7 +92,6 @@
 
     .audio-btn:hover { transform: scale(1.15); }
 
-    /* Main Deck Container */
     .card-deck {
       width: 92%;
       max-width: 440px;
@@ -104,7 +100,6 @@
       z-index: 10;
     }
 
-    /* Card Slides */
     .slide {
       position: absolute;
       top: 0;
@@ -139,13 +134,11 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Text Styles */
     .serif { font-family: 'Cinzel', serif; letter-spacing: 1.5px; }
     h2 { font-size: 1.35rem; color: #f472b6; text-shadow: 0 0 15px rgba(244, 114, 182, 0.4); }
     p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; font-weight: 300; }
     .subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: #a855f7; font-weight: 700; }
 
-    /* Heartfelt Paragraph Box */
     .note-box {
       background: rgba(255, 255, 255, 0.04);
       border-left: 3px solid #f472b6;
@@ -159,7 +152,6 @@
       box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
     }
 
-    /* Photo Frame Styles */
     .single-frame-container {
       width: 100%;
       display: flex;
@@ -176,6 +168,7 @@
       width: 240px;
       position: relative;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .photo-frame:hover {
@@ -201,7 +194,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .frame-placeholder {
@@ -223,7 +215,6 @@
       font-weight: 600;
     }
 
-    /* Buttons & Controls */
     .controls { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 6px; }
     .btn {
       background: rgba(255, 255, 255, 0.06);
@@ -250,7 +241,6 @@
     .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); transition: all 0.3s; }
     .dot.active { background: #a855f7; width: 16px; border-radius: 10px; box-shadow: 0 0 10px #a855f7; }
 
-    /* Particles */
     .sparkle {
       position: fixed;
       pointer-events: none;
@@ -269,12 +259,10 @@
 </head>
 <body>
 
-  <!-- Background Glow Orbs -->
   <div class="bg-decoration bg-1"></div>
   <div class="bg-decoration bg-2"></div>
   <div class="bg-decoration bg-3"></div>
 
-  <!-- Music Controls -->
   <div class="audio-controls">
     <button class="audio-btn" id="music-btn" onclick="toggleAudio()" title="Toggle Music">🎵</button>
     <span id="music-text" style="font-size: 0.75rem; color: #a855f7; font-weight: 600;">Tap anywhere to play</span>
@@ -290,12 +278,14 @@
       <h2 class="serif">Happy 15th Birthday <span class="highlight-name">Naina</span>! 🎉</h2>
       
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(-2deg);">
+        <div class="photo-frame" style="transform: rotate(-2deg);" onclick="triggerFileInput('file-1')">
+          <input type="file" id="file-1" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-1', 'ph-1')">
           <div class="frame-box">
-            <img id="img-1" src="" alt="IMG_20260910_135955_541.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <!-- Replace photo1.jpg with your image path or web link -->
+            <img id="img-1" src="IMG_20260910_135955_541.jpg" alt="Photo 1" onerror="handleImageError('img-1', 'ph-1')">
+            <div class="frame-placeholder" id="ph-1" style="display:none;">
               <span>🖼️</span>
-              Photo Frame 1
+              Tap to add Photo 1
             </div>
           </div>
           <p class="frame-caption">The Birthday Queen 👑</p>
@@ -319,12 +309,13 @@
       <h2 class="serif">Shining Bright ✨</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(2deg);">
+        <div class="photo-frame" style="transform: rotate(2deg);" onclick="triggerFileInput('file-2')">
+          <input type="file" id="file-2" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-2', 'ph-2')">
           <div class="frame-box">
-            <img id="img-2" src="" alt="IMG_20260910_135955_540.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-2" src="IMG_20260910_135955_540.jpg" alt="Photo 2" onerror="handleImageError('img-2', 'ph-2')">
+            <div class="frame-placeholder" id="ph-2" style="display:none;">
               <span>📸</span>
-              Photo Frame 2
+              Tap to add Photo 2
             </div>
           </div>
           <p class="frame-caption">Best Smile 😊</p>
@@ -346,12 +337,13 @@
       <h2 class="serif">Favorite Person Note 💖</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(-3deg);">
+        <div class="photo-frame" style="transform: rotate(-3deg);" onclick="triggerFileInput('file-3')">
+          <input type="file" id="file-3" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-3', 'ph-3')">
           <div class="frame-box">
-            <img id="img-3" src="" alt="IMG_20260910_135952_724.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-3" src="IMG_20260910_135952_724.jpg" alt="Photo 3" onerror="handleImageError('img-3', 'ph-3')">
+            <div class="frame-placeholder" id="ph-3" style="display:none;">
               <span>🌟</span>
-              Photo Frame 3
+              Tap to add Photo 3
             </div>
           </div>
           <p class="frame-caption">Pure Joy 🌙</p>
@@ -375,12 +367,13 @@
       <h2 class="serif">Iconic Vibes 🔮</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(3deg);">
+        <div class="photo-frame" style="transform: rotate(3deg);" onclick="triggerFileInput('file-4')">
+          <input type="file" id="file-4" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-4', 'ph-4')">
           <div class="frame-box">
-            <img id="img-4" src="" alt="IMG_20260910_135952_721.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-4" src="IMG_20260910_135952_721.jpg" alt="Photo 4" onerror="handleImageError('img-4', 'ph-4')">
+            <div class="frame-placeholder" id="ph-4" style="display:none;">
               <span>💖</span>
-              Photo Frame 4
+              Tap to add Photo 4
             </div>
           </div>
           <p class="frame-caption">Always Stylish 💅</p>
@@ -402,12 +395,13 @@
       <h2 class="serif">Golden Memories 🌌</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(-2deg);">
+        <div class="photo-frame" style="transform: rotate(-2deg);" onclick="triggerFileInput('file-5')">
+          <input type="file" id="file-5" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-5', 'ph-5')">
           <div class="frame-box">
-            <img id="img-5" src="" alt="IMG_20260910_135955_742.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-5" src="IMG_20260910_135955_742.jpg" alt="Photo 5" onerror="handleImageError('img-5', 'ph-5')">
+            <div class="frame-placeholder" id="ph-5" style="display:none;">
               <span>🎬</span>
-              Photo Frame 5
+              Tap to add Photo 5
             </div>
           </div>
           <p class="frame-caption">Precious Moments 🎈</p>
@@ -429,12 +423,13 @@
       <h2 class="serif">One Of A Kind ⭐</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(2deg);">
+        <div class="photo-frame" style="transform: rotate(2deg);" onclick="triggerFileInput('file-6')">
+          <input type="file" id="file-6" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-6', 'ph-6')">
           <div class="frame-box">
-            <img id="img-6" src="" alt="VID_20260910_012955_548.mp4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-6" src="VID_20260910_012955_548.mp4" alt="Photo 6" onerror="handleImageError('img-6', 'ph-6')">
+            <div class="frame-placeholder" id="ph-6" style="display:none;">
               <span>✨</span>
-              Photo Frame 6
+              Tap to add Photo 6
             </div>
           </div>
           <p class="frame-caption">Star Energy 🚀</p>
@@ -456,12 +451,13 @@
       <h2 class="serif">Cheers to 15! 🎂</h2>
 
       <div class="single-frame-container">
-        <div class="photo-frame" style="transform: rotate(0deg);">
+        <div class="photo-frame" style="transform: rotate(0deg);" onclick="triggerFileInput('file-7')">
+          <input type="file" id="file-7" accept="image/*" style="display:none;" onchange="loadPhoto(event, 'img-7', 'ph-7')">
           <div class="frame-box">
-            <img id="img-7" src="" alt="VID_20260910_012955_548.mp4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="frame-placeholder">
+            <img id="img-7" src="VID_20260910_012955_548.mp4" alt="Photo 7" onerror="handleImageError('img-7', 'ph-7')">
+            <div class="frame-placeholder" id="ph-7" style="display:none;">
               <span>🎂</span>
-              Photo Frame 7
+              Tap to add Photo 7
             </div>
           </div>
           <p class="frame-caption">Happy Birthday Naina! 🥳</p>
@@ -483,22 +479,41 @@
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 
-    // Advanced Web Audio API Piano/Chime Synthesizer
+    function triggerFileInput(inputId) {
+      document.getElementById(inputId).click();
+    }
+
+    function handleImageError(imgId, placeholderId) {
+      document.getElementById(imgId).style.display = 'none';
+      document.getElementById(placeholderId).style.display = 'flex';
+    }
+
+    function loadPhoto(event, imgId, placeholderId) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById(imgId);
+          const placeholder = document.getElementById(placeholderId);
+          img.src = e.target.result;
+          img.style.display = 'block';
+          if (placeholder) placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
     let audioCtx = null;
     let isPlaying = false;
     let timerId = null;
 
-    // Happy Birthday melody notes (Note, Duration in sec)
     const song = [
       { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 293.66, dur: 0.6 },
       { note: 261.63, dur: 0.6 },  { note: 349.23, dur: 0.6 },  { note: 329.63, dur: 1.0 },
-      
       { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 293.66, dur: 0.6 },
       { note: 261.63, dur: 0.6 },  { note: 392.00, dur: 0.6 },  { note: 349.23, dur: 1.0 },
-      
       { note: 261.63, dur: 0.35 }, { note: 261.63, dur: 0.25 }, { note: 523.25, dur: 0.6 },
       { note: 440.00, dur: 0.6 },  { note: 349.23, dur: 0.6 },  { note: 329.63, dur: 0.6 }, { note: 293.66, dur: 0.8 },
-      
       { note: 466.16, dur: 0.35 }, { note: 466.16, dur: 0.25 }, { note: 440.00, dur: 0.6 },
       { note: 349.23, dur: 0.6 },  { note: 392.00, dur: 0.6 },  { note: 349.23, dur: 1.2 }
     ];
@@ -507,24 +522,19 @@
 
     function playPianoNote(freq, duration) {
       if (!audioCtx) return;
-
       const now = audioCtx.currentTime;
-
-      // Main Oscillator (Sine + Triangle blend for piano sound)
       const osc1 = audioCtx.createOscillator();
       const osc2 = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
 
       osc1.type = 'sine';
       osc2.type = 'triangle';
-
       osc1.frequency.setValueAtTime(freq, now);
-      osc2.frequency.setValueAtTime(freq * 2, now); // Harmonic overtone
+      osc2.frequency.setValueAtTime(freq * 2, now);
 
-      // Gain Envelope (Piano Key strike decay)
       gainNode.gain.setValueAtTime(0.001, now);
-      gainNode.gain.linearRampToValueAtTime(0.25, now + 0.03); // Quick attack
-      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.3); // Soft decay
+      gainNode.gain.linearRampToValueAtTime(0.25, now + 0.03);
+      gainNode.gain.exponentialRampToValueAtTime(0.0001, now + duration + 0.3);
 
       osc1.connect(gainNode);
       osc2.connect(gainNode);
@@ -532,7 +542,6 @@
 
       osc1.start(now);
       osc2.start(now);
-
       osc1.stop(now + duration + 0.4);
       osc2.stop(now + duration + 0.4);
     }
@@ -541,7 +550,6 @@
       if (!isPlaying) return;
       const current = song[noteIndex];
       playPianoNote(current.note, current.dur);
-
       noteIndex = (noteIndex + 1) % song.length;
       timerId = setTimeout(stepMelody, current.dur * 750);
     }
@@ -572,11 +580,9 @@
       }
     }
 
-    // Auto-start music on first interaction (click/touch/slide navigation)
     window.addEventListener('click', startMusic, { once: true });
     window.addEventListener('touchstart', startMusic, { once: true });
 
-    // Dots Setup
     function setupDots() {
       slides.forEach((slide, sIdx) => {
         const dotsContainer = slide.querySelector('.dots');
@@ -623,7 +629,6 @@
       updateSlides();
     }
 
-    // Interactive Sparkles Trail
     window.addEventListener('mousemove', (e) => {
       if (Math.random() < 0.2) {
         const particle = document.createElement('div');
@@ -640,7 +645,6 @@
       }
     });
 
-    // Confetti Engine
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -696,4 +700,3 @@
   </script>
 </body>
 </html>
-
